@@ -11,8 +11,8 @@ function Footer() {
         <CheckCircleIcon className="w-8 h-8 text-accent" />
       </div>
       <h3 className="text-xl font-semibold mb-2">Contact </h3>
-      <p className="mb-4">richelalem12@gmail.com</p>
-      <p>&copy; {new Date().getFullYear()} Brii-Wise. All rights reserved.</p>
+      <p className="mb-4">admin.support@gmail.com</p>
+      <p>&copy; {new Date().getFullYear()} Birr-Wise. All rights reserved.</p>
     </footer>
   );
 }

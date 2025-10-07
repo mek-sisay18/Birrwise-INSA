@@ -42,7 +42,7 @@ export default function HeroSection() {
    
       <motion.img
         src="/proj.png"
-        alt="Brii App Hero"
+        alt="Birr App Hero"
         className="absolute right-2 bottom-2 md:static md:w-96 w-72 rounded-xl shadow-xl"
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}

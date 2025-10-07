@@ -64,7 +64,7 @@ export default function FeatureScroll() {
   return (
     <section id="features" className="py-20 bg-background dark:bg-darkblue">
       <h2 className="text-3xl font-bold text-center mb-12 text-primary dark:text-yellow-400">
-        Why Choose Brii-Wise?
+        Why Choose Birr-Wise?
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

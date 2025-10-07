@@ -63,14 +63,14 @@ export default function LoginPage() {
         }`}
       >
         <h2 className="text-2xl font-bold mb-2 text-center">
-          Welcome to Brii-Wise
+          Welcome to Birr-Wise
         </h2>
         <p
           className={`text-sm text-center mb-6 ${
             theme === "dark" ? "text-yellow-300" : "text-black/70"
           }`}
         >
-          እንኳን ደህና መጣህ 
+          እንኳን ደህና መጡ! 
         </p>
         <form onSubmit={handleLogin} className="space-y-4">
           <input

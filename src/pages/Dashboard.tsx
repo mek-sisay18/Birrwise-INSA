@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import { user } from "../data/mockUser";
 import * as Icons from "@heroicons/react/24/outline";
 import { transactions } from "../data/transaction";
-
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   return (
@@ -61,7 +61,6 @@ export default function Dashboard() {
                     key={tx.id}
                     className="flex items-center justify-between py-4"
                   >
-                    {/* Left side: Icon + title + category */}
                     <div className="flex items-center gap-3">
                       {IconComponent && (
                         <IconComponent className="w-6 h-6 text-gray-500" />
@@ -76,13 +75,12 @@ export default function Dashboard() {
                       </div>
                     </div>
 
-                    {/* Right side: Value */}
                     <span
                       className={`font-semibold ${
                         tx.value >= 0 ? "text-green-600" : "text-red-500"
                       }`}
                     >
-                      {tx.value >= 0 ? `+${tx.value}` : tx.value}
+                      {tx.value >= 0 ? `+${tx.value} ETB` : `${tx.value} ETB`}
                     </span>
                   </div>
                 );
@@ -91,69 +89,96 @@ export default function Dashboard() {
           </div>
 
           <div className="flex flex-1 gap-4 p-4 transition-all duration-300">
-            
-            
             <div className=" flex-1 bg-white shadow-lg rounded-2xl p-6">
               <span className="font-md text-md text-green-900 ">
                 Quick Actions
               </span>
               <div className="grid grid-cols-2 gap-4 items-center">
                 {/* Box 1 */}
-                <div className="bg-red-400 p-4 rounded-xl text-center">
-                  <Icons.ArrowTrendingDownIcon className="text-white font-bold w-8 h-8 mb-2"></Icons.ArrowTrendingDownIcon>
-                  <p className="text-md text-white font-bold">Add Expense</p>
-                </div>
+                <Link to="/expense">
+                  <div className="bg-red-400 p-4 rounded-xl text-center hover:shadow-xl">
+                    <Icons.ArrowTrendingDownIcon className="text-white font-bold w-8 h-8 mb-2"></Icons.ArrowTrendingDownIcon>
+                    <p className="text-md text-white font-bold">Add Expense</p>
+                  </div>
+                </Link>
 
                 {/* Box 2 */}
-                <div className="bg-green-600 p-4 rounded-xl text-center">
-                  <Icons.ArrowTrendingUpIcon className="text-white font-bold w-8 h-8 mb-2"></Icons.ArrowTrendingUpIcon>
-                  <p className="text-md text-white font-bold">Add Income</p>
-                </div>
+                <Link to="/income">
+                  <div className="bg-green-600 p-4 rounded-xl text-center hover:shadow-xl">
+                    <Icons.ArrowTrendingUpIcon className="text-white font-bold w-8 h-8 mb-2"></Icons.ArrowTrendingUpIcon>
+                    <p className="text-md text-white font-bold">Add Income</p>
+                  </div>
+                </Link>
 
                 {/* Box 3 */}
-                <div className="bg-white p-4 rounded-xl text-center border border-green-900">
-                  <Icons.ChartPieIcon className="text-green-900 font-bold w-8 h-8 mb-2"></Icons.ChartPieIcon>
-                  <p className="text-md font-bold text-green-900">View Analytics</p>
-                </div>
+                <Link to="/analytics">
+                  <div className="bg-white p-4 rounded-xl text-center border border-green-900 hover:shadow-xl ">
+                    <Icons.ChartPieIcon className="text-green-900 font-bold w-8 h-8 mb-2"></Icons.ChartPieIcon>
+                    <p className="text-md font-bold text-green-900">
+                      View Analytics
+                    </p>
+                  </div>
+                </Link>
 
                 {/* Box 4 */}
-                <div className="bg-white p-4 rounded-xl text-center border border-purple-900">
-                  <Icons.ChartBarIcon className="text-purple-900 font-bold w-8 h-8 mb-2"></Icons.ChartBarIcon>
-                  <p className="text-md font-bold text-purple-800">Goals</p>
-                </div>
+                <Link to="/transaction">
+                  <div className="bg-white p-4 rounded-xl text-center border border-purple-900 hover:shadow-xl">
+                    <Icons.ChartBarIcon className="text-purple-900 font-bold w-8 h-8 mb-2"></Icons.ChartBarIcon>
+                    <p className="text-md font-bold text-purple-800">
+                      Transactions
+                    </p>
+                  </div>
+                </Link>
               </div>
             </div>
-            
+
             <div className=" flex-1 bg-white shadow-lg rounded-2xl p-6">
               <span className="font-md text-md text-green-900">
                 Quick Insights
               </span>
               <div className="justify-between grid grid-cols-2 gap-4 items-center py-2">
-                <span className="text-md text-black">Top Spending Category</span>
-                <div className="bg-purple-900 rounded-lg text-sm text-white font-bold px-2 items-center"><span>Food & Drinking</span></div>
-
+                <span className="text-md text-black">
+                  Top Spending Category
+                </span>
+                <div className="bg-purple-900 rounded-lg text-sm text-white font-bold px-2 items-center">
+                  <span>Food & Drinking</span>
+                </div>
               </div>
 
               <div className="justify-between grid grid-cols-2 gap-4 items-center py-2">
-                <span className="text-md text-black">This month vs last month</span>
-                <div className="bg-red-700 rounded-lg text-sm text-white font-bold px-2 items-center"><span>+12% expenses</span></div>
-                
+                <span className="text-md text-black">
+                  This month vs last month
+                </span>
+                <div className="bg-red-700 rounded-lg text-sm text-white font-bold px-2 items-center">
+                  <span>+12% expenses</span>
+                </div>
               </div>
 
               <div className="justify-between grid grid-cols-2 gap-4 items-center py-2">
                 <span className="text-md text-black">Budget Status</span>
-                <div className="bg-green-700 rounded-lg text-sm text-white font-bold px-2 items-center"><span>On track</span></div>
-                
+                <div className="bg-green-700 rounded-lg text-sm text-white font-bold px-2 items-center">
+                  <span>On track</span>
+                </div>
               </div>
-
             </div>
             <div className=" flex-1 bg-white shadow-lg rounded-2xl p-6">
               <span className="font-md text-md text-green-900">
                 Financial Tips
               </span>
               <div className="flex-1 my-2">
-                <div className="my-2 mx-2 py-4 px-2 bg-green-100 text-green-900 text-md rounded-lg"><span> 💡Consider reducing dining out expenses by 20% to reach your saving goal faster.</span></div>
-              <div className="my-4 mx-2 py-4 px-2 bg-purple-400 text-purple-900 text-md rounded-lg"><span> 🎯You're 500 ETB away from your monthly savings target.</span></div>
+                <div className="my-2 mx-2 py-4 px-2 bg-green-100 text-green-900 text-md rounded-lg">
+                  <span>
+                    {" "}
+                    💡Consider reducing dining out expenses by 20% to reach your
+                    saving goal faster.
+                  </span>
+                </div>
+                <div className="my-4 mx-2 py-4 px-2 bg-purple-400 text-purple-900 text-md rounded-lg">
+                  <span>
+                    {" "}
+                    🎯You're 500 ETB away from your monthly savings target.
+                  </span>
+                </div>
               </div>
             </div>
           </div>

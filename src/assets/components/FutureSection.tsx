@@ -72,7 +72,7 @@ export default function FutureSection() {
       >
         Visualize your goals and watch your savings grow.{" "}
         <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
-          Brii-Wise
+          Birr-Wise
         </span>{" "}
         helps you manage, plan, and achieve your dreams with clarity and
         confidence.

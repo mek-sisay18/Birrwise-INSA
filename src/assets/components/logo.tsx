@@ -1,6 +1,6 @@
 
 
-export default function Logo({ size = 40 }: { size?: number }) {
+export default function Logo({ size = 60 }: { size?: number }) {
   return (
     <svg
       width={size * 2}

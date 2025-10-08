@@ -7,7 +7,7 @@ function Navbar() {
     <nav className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow flex justify-between items-center px-8 py-6">
      
       <div className="flex items-center space-x-2">
-        <Logo size={28} />
+        <Logo size={30} />
         <span className="text-2xl font-bold text-primary dark:text-white">Birr-Wise</span>
       </div>
 

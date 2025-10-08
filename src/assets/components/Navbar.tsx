@@ -8,7 +8,7 @@ function Navbar() {
      
       <div className="flex items-center space-x-2">
         <Logo size={28} />
-        <span className="text-2xl font-bold text-primary dark:text-white">Brii-Wise</span>
+        <span className="text-2xl font-bold text-primary dark:text-white">Birr-Wise</span>
       </div>
 
       

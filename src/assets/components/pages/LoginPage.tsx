@@ -37,7 +37,7 @@ export default function LoginPage() {
               theme === "dark" ? "text-yellow-400" : "text-black"
             }`}
           >
-            Birr-Wise
+            Birr-Wise 
           </h1>
         </div>
         <button

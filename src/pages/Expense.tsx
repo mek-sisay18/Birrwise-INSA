@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { transactions } from "../data/transaction";
+import { useState } from "react";
 
 import {
   ArrowTrendingDownIcon,
@@ -18,6 +19,28 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function Expense() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [amount, setAmount] = useState<string>("");
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+    setTitle("");
+    setCategory("");
+    setAmount("");
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    console.log("Add Expense submitted:", { title, category, amount });
+    closeModal();
+  }
+
   const filteredTransactions = transactions.transactions.filter((t) =>
     [1, 2, 4].includes(t.id)
   );
@@ -38,10 +61,81 @@ export default function Expense() {
                   Track and categorize your daily spending.
                 </p>
               </div>
-              <div className="bg-green-900 text-md font-bold text-white rounded-md py-2 px-2">
-                <p>+ Add Expense</p>
-              </div>
+              <button
+                onClick={openModal}
+                className="bg-green-900 text-md font-bold text-white rounded-md py-2 px-4 hover:opacity-90"
+              >
+                + Add Expense
+              </button>
             </div>
+
+            {/* Modal */}
+            {isModalOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center">
+                <div
+                  className="absolute inset-0 bg-black/40"
+                  onClick={closeModal}
+                />
+
+                <div className="relative w-full max-w-md mx-4 bg-white rounded-lg shadow-lg p-6 z-10">
+                  <h3 className="text-lg font-semibold mb-4">Add Expense</h3>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Title
+                      </label>
+                      <input
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Category
+                      </label>
+                      <input
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Amount (ETB)
+                      </label>
+                      <input
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        type="number"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500"
+                        required
+                      />
+                    </div>
+
+                    <div className="flex justify-end gap-2">
+                      <button
+                        type="button"
+                        onClick={closeModal}
+                        className="px-4 py-2 rounded-md bg-gray-200"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-4 py-2 rounded-md bg-green-700 text-white"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
 
             <div className="flex flex-wrap gap-6">
               {expenses.expensecate.map((item) => {

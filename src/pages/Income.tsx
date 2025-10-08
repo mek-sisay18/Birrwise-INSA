@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { transactions } from "../data/transaction";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ArrowTrendingDownIcon,
@@ -23,6 +23,14 @@ export default function Income() {
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
+  const [items, setItems] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/income")
+      .then((res) => res.json())
+      .then((data) => setItems(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   function openModal() {
     setIsModalOpen(true);
@@ -38,9 +46,21 @@ export default function Income() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // In a real app you'd send this to your backend or update context/store
-    console.log("Add Income submitted:", { title, category, amount });
-    closeModal();
+    const payload = { title, category, amount: Number(amount) };
+    fetch("http://localhost:4000/api/income", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setItems((s) => [data, ...s]);
+        closeModal();
+      })
+      .catch((err) => {
+        console.error(err);
+        closeModal();
+      });
   }
 
   const filteredTransactions = transactions.transactions.filter((t) =>
@@ -163,7 +183,33 @@ export default function Income() {
                 Recent Income
               </h2>
               <div className="flex flex-col divide-y divide-gray-200">
-                {filteredTransactions.map((item) => {
+                {items.length > 0
+                  ? items.map((item) => {
+                      const Icon = iconMap[item.icon];
+                      return (
+                        <div
+                          key={item._id || item.id}
+                          className="flex items-center justify-between py-4"
+                        >
+                          <div className="flex items-center gap-3">
+                            {Icon && <Icon className="w-6 h-6 text-gray-500" />}
+                            <div className="flex flex-col">
+                              <span className="font-medium text-gray-800">
+                                {item.title}
+                              </span>
+                              <span className="text-sm text-gray-500">
+                                {item.category}
+                              </span>
+                            </div>
+                          </div>
+
+                          <span className={`font-semibold ${item.amount >= 0 ? "text-green-600" : "text-red-500"}`}>
+                            {item.amount >= 0 ? `+${item.amount} ETB` : `${item.amount} ETB`}
+                          </span>
+                        </div>
+                      );
+                    })
+                  : filteredTransactions.map((item) => {
                   const Icon = iconMap[item.icon];
                   return (
                     <div
